@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Document: {{ receipt.number }}</h2>
+
+<p><strong>QR Number:</strong> {{ receipt.qr_number }}</p>
+<p><strong>Description:</strong> {{ receipt.description }}</p>
+
+<p>
+    <strong>File:</strong>
+    <a href="{{ receipt.file.url }}" target="_blank">Download/View</a>
+</p>
+
+{% if ".pdf" in receipt.file.url|lower %}
+    <object
+        data="{{ request.scheme }}://{{ request.get_host }}{{ receipt.file.url }}"
+        type="application/pdf"
+        width="100%"
+        height="600px">
+
+        <p>
+            Preview not available.
+            <a href="{{ receipt.file.url }}" target="_blank">Download PDF</a>
+        </p>
+    </object>
+
+{% elif ".jpg" in receipt.file.url|lower or ".jpeg" in receipt.file.url|lower or ".png" in receipt.file.url|lower %}
+    <img src="{{ receipt.file.url }}"
+         style="max-width:100%; max-height:600px;">
+
+{% else %}
+    <p>Preview not available.</p>
+{% endif %}
+
+<img src="{% url 'receipt_qr_code' receipt.pk %}" alt="QR Code">
+{% endblock %}

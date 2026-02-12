@@ -1,0 +1,28 @@
+1 st i wnat to make qr code 
+2 that user scan that qr code there is redirect to the trip.html something like taht 
+3 that html include the detail of trip place not include price that html have modernize UI/UX and responsive afther that attriactive 
+4 that html have a thre folder Folder 1 is the Trip Documents , 2 is teh Detail Plan, 3 is the receipt 
+5 i want to do that folder can't access to the normal user , special user can access there is the fuction 
+download updoad and edit the trip data 
+6 noram user can see only the trip detail eg trip where to where depature date and time arrival date and time 
+Hotal check in date and hotal name , return date and time 
+7 super user need to accens the foler the super need to log in with user name and password afther finined that super 
+user can manage that folder ,
+8 i want to make the pyhton django frame work so i have already install the postgresql 
+
+
+
+
+
+Step 2: Enable CGI in IIS
+Open IIS Manager.
+Click on your server in the left panel.
+In the center panel, double-click "Handler Mappings".
+On the right, click "Add Module Mapping...".
+Set:
+Request path: *
+Module: FastCgiModule
+Executable: Path to your Python executable, e.g.
+C:\inetpub\QRcodesystem\qr_trip_project\.venv\Scripts\python.exe|wfastcgi.py
+Name: Python FastCGI
+Click OK and confirm if prompted.

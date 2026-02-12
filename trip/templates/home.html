@@ -1,0 +1,294 @@
+{% extends "base.html" %}
+{% block content %}
+    <style>
+        /* Modern Timeline Styling */
+        .timeline-container {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .day-card {
+            background: white;
+            border-radius: 24px;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            margin-bottom: 2.5rem;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .day-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .day-header {
+            background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .day-number {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        .day-date {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .itinerary-list {
+            list-style: none;
+            padding: 1.5rem;
+            margin: 0;
+        }
+
+        .itinerary-item {
+            display: flex;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .itinerary-item:last-child { margin-bottom: 0; }
+
+        .time-slot {
+            min-width: 100px;
+            font-weight: 600;
+            color: var(--primary-accent);
+            font-size: 0.9rem;
+            padding-top: 2px;
+        }
+
+        .activity-desc {
+            flex-grow: 1;
+            padding-left: 15px;
+            border-left: 2px solid #f1f5f9;
+        }
+
+        .activity-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .activity-text {
+            color: #64748b;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Folder Grid */
+        .folder-tile {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+            height: 100%;
+        }
+
+        .folder-link:hover .folder-tile {
+            transform: translateY(-8px);
+            border-color: var(--primary-accent);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .itinerary-item { flex-direction: column; }
+            .time-slot { margin-bottom: 5px; min-width: auto; }
+            .activity-desc { padding-left: 0; border-left: none; }
+        }
+    </style>
+
+    <div class="text-center mb-5 mt-3">
+        <span class="badge rounded-pill bg-info bg-opacity-10 text-info px-3 py-2 mb-3">5 Days in Paradise</span>
+        <h1 class="display-5 fw-bold" style="color: var(--text-dark);">Bangkok <span style="color:var(--primary-accent)">→</span> Phú Quốc</h1>
+         <h1 class="display-5 fw-bold" style="color: var(--text-dark);">Phú Quốc <span style="color:var(--primary-accent)">→</span> Bangkok</h1>
+        <p class="text-muted mx-auto" style="max-width: 700px;">
+            A romantic holiday escape featuring sun-drenched beaches, cable car adventures, and sunset photography.
+        </p>
+    </div>
+
+
+    <div class="timeline-container">
+        
+        <div class="day-card">
+            <div class="day-header">
+                <p class="day-date">Dec 24, 2025</p>
+                <span class="day-number">Arrival & Sunsets</span>
+            </div>
+            <ul class="itinerary-list">
+                <li class="itinerary-item">
+                    <div class="time-slot">Morning</div>
+                    <div class="activity-desc">
+                        <span class="activity-title">Departure from Bangkok</span>
+                        <span class="activity-text">Journey begins with a taxi ride to the airport for the flight to Phú Quốc.</span>
+                    </div>
+                </li>
+                <li class="itinerary-item">
+                    <div class="time-slot">Midday</div>
+                    <div class="activity-desc">
+                        <span class="activity-title">Hotel Check-in</span>
+                        <span class="activity-text">Arrive in Phú Quốc, check into the hotel, and enjoy a local lunch.</span>
+                    </div>
+                </li>
+                <li class="itinerary-item">
+                    <div class="time-slot">4:30 PM</div>
+                    <div class="activity-desc">
+                        <span class="activity-title">Camia Restaurant Photoshoot</span>
+                        <span class="activity-text">Sunset photoshoot followed by dinner in a peaceful seaside atmosphere.</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="day-card">
+            <div class="day-header">
+                <p class="day-date">Dec 25, 2025</p>
+                <span class="day-number">Adventure & Performance</span>
+            </div>
+            <ul class="itinerary-list">
+                <li class="itinerary-item">
+                    <div class="time-slot">9AM - 3PM</div>
+                    <div class="activity-desc">
+                        <span class="activity-title">An Thoi Station Cable Car</span>
+                        <span class="activity-text">Panoramic sea views with a round-trip package. Optional visits to Aquatopia Water Park or Exotica Park.</span>
+                    </div>
+                </li>
+                <li class="itinerary-item">
+                    <div class="time-slot">5:30 PM</div>
+                    <div class="activity-desc">
+                        <span class="activity-title">Kiss Bridge & Shows</span>
+                        <span class="activity-text">Photography at Kiss Bridge, followed by "Symphony of the Sea" and "Kiss of the Sea" performances.</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="day-card">
+            <div class="day-header">
+                <p class="day-date">Dec 26, 2025</p>
+                <span class="day-number">Beach & Night Market</span>
+            </div>
+            <ul class="itinerary-list">
+                <li class="itinerary-item">
+                    <div class="time-slot">Morning</div>
+                    <div class="activity-desc">
+                        <span class="activity-title">Sunset Town Bike Tour</span>
+                        <span class="activity-text">Rent a bike and take photos around the scenic Sunset Town area.</span>
+                    </div>
+                </li>
+                <li class="itinerary-item">
+                    <div class="time-slot">2:00 PM</div>
+                    <div class="activity-desc">
+                        <span class="activity-title">Sao Beach (Bãi Sao)</span>
+                        <span class="activity-text">Enjoy the white sand and sunset lunch at the Sunset Sanato Beach Club.</span>
+                    </div>
+                </li>
+                <li class="itinerary-item">
+                    <div class="time-slot">Night</div>
+                    <div class="activity-desc">
+                        <span class="activity-title">Local Night Market</span>
+                        <span class="activity-text">Explore the market for food, drinks, and local shopping.</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="day-card">
+            <div class="day-header">
+                <p class="day-date">Dec 27, 2025</p>
+                <span class="day-number">VinWonders & Grand World</span>
+            </div>
+            <ul class="itinerary-list">
+                <li class="itinerary-item">
+                    <div class="time-slot">Morning</div>
+                    <div class="activity-desc">
+                        <span class="activity-title">Local Market & Relocation</span>
+                        <span class="activity-text">Visit the local market before checking into VinHolidays Fiesta Phú Quốc.</span>
+                    </div>
+                </li>
+                <li class="itinerary-item">
+                    <div class="time-slot">2:30 PM</div>
+                    <div class="activity-desc">
+                        <span class="activity-title">VinWonders Exploration</span>
+                        <span class="activity-text">Lunch at a deep-sea seafood restaurant followed by theme park activities.</span>
+                    </div>
+                </li>
+                <li class="itinerary-item">
+                    <div class="time-slot">Evening</div>
+                    <div class="activity-desc">
+                        <span class="activity-title">Grand World Night View</span>
+                        <span class="activity-text">Photography at Grand World and relaxation at the hotel pool or spa.</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="day-card">
+            <div class="day-header">
+                <p class="day-date">Dec 28, 2025</p>
+                <span class="day-number">Farewell</span>
+            </div>
+            <ul class="itinerary-list">
+                <li class="itinerary-item">
+                    <div class="time-slot">12:00 PM</div>
+                    <div class="activity-desc">
+                        <span class="activity-title">Check-out & Lunch</span>
+                        <span class="activity-text">Final island lunch before heading to the airport.</span>
+                    </div>
+                </li>
+                <li class="itinerary-item">
+                    <div class="time-slot">6:45 PM</div>
+                    <div class="activity-desc">
+                        <span class="activity-title">Back Home</span>
+                        <span class="activity-text">Return to Bangkok with wonderful holiday memories.</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-6 col-md-4">
+            <a href="{% url 'documents' %}" class="folder-link">
+                <div class="folder-tile">
+                    <span class="folder-icon-new">📂</span>
+                    <div class="folder-label">Documents</div>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-4">
+            <a href="{% url 'detail_plan' %}" class="folder-link">
+                <div class="folder-tile">
+                    <span class="folder-icon-new">🗺️</span>
+                    <div class="folder-label">Detail Plan</div>
+                </div>
+            </a>
+        </div>
+        <div class="col-12 col-md-4">
+            <a href="{% url 'receipts' %}" class="folder-link">
+                <div class="folder-tile">
+                    <span class="folder-icon-new">🧾</span>
+                    <div class="folder-label">Receipts</div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    {% if not user.is_authenticated %}
+    
+    
+    {% endif %}
+{% endblock %}

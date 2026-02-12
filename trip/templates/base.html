@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QR Trip System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-accent: #00b4d8; /* Tropical Sea Blue */
+            --secondary-accent: #f77f00; /* Sunset Orange */
+            --bg-light: #f8f9fa;
+            --text-dark: #2b2d42;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            background-image: radial-gradient(circle at 0% 0%, rgba(0, 180, 216, 0.05) 0%, transparent 50%),
+                              radial-gradient(circle at 100% 100%, rgba(247, 127, 0, 0.05) 0%, transparent 50%);
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Responsive Navbar */
+        .navbar {
+            background: rgba(255, 255, 255, 0.8) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            z-index: 1050;
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            color: var(--primary-accent) !important;
+            letter-spacing: -0.5px;
+            font-size: 1.25rem;
+        }
+
+        /* Responsive Header/QR Section */
+        .qr-header-section {
+            padding: 2rem 1rem 0;
+            text-align: center;
+        }
+
+        .home-qr-img {
+            width: 120px;
+            height: 120px;
+            padding: 10px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .home-qr-img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Custom Button Styling */
+        .btn-primary-custom {
+            background: var(--primary-accent);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 10px 24px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 180, 216, 0.3);
+            color: white;
+            background: #0096b4;
+        }
+
+        /* Content Container Adjustments */
+        .main-content {
+            padding-bottom: 3rem;
+        }
+
+        /* Media Queries for fine-tuning */
+        @media (max-width: 576px) {
+            .navbar-brand { font-size: 1.1rem; }
+            .home-qr-img { width: 100px; height: 100px; }
+            .qr-header-section { padding-top: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">📍 QR Trip System</a>
+        </div>
+    </nav>
+
+    <header class="qr-header-section container">
+        <div class="d-inline-block">
+            <img src="{% url 'home_qr_code' %}" alt="Home QR Code" class="home-qr-img img-fluid">
+            <p class="small text-muted mt-2 mb-0">Scan to open this site</p>
+        </div>
+    </header>
+
+    <main class="container main-content my-4 my-md-5">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="container text-center py-4 border-top">
+        <p class="small text-muted mb-0">&copy; 2025 QR Trip System | Phu Quoc Holiday</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'trip/style.css' %}">
+    <title>Trip Details</title>
+</head>
+<body>
+    <header>
+        <h1>Trip Details</h1>
+    </header>
+    <main>
+        <section class="trip-info">
+            <h2>Trip Information</h2>
+            <p><strong>Destination:</strong> {{ trip.destination }}</p>
+            <p><strong>Date:</strong> {{ trip.date }}</p>
+            <p><strong>Description:</strong> {{ trip.description }}</p>
+        </section>
+        <section class="restricted-access">
+            <h2>Restricted Access</h2>
+            {% if user.is_superuser %}
+                <p>You have access to the following folders:</p>
+                <ul>
+                    <li><a href="{% url 'restricted_folder_1' %}">Restricted Folder 1</a></li>
+                    <li><a href="{% url 'restricted_folder_2' %}">Restricted Folder 2</a></li>
+                </ul>
+            {% else %}
+                <p>You do not have access to restricted folders.</p>
+            {% endif %}
+        </section>
+    </main>
+    <footer>
+        <p>&copy; {{ current_year }} Trip Planner</p>
+    </footer>
+</body>
+</html>

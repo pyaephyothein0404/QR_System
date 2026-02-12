@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    /* Table Container */
+    .doc-card {
+        background: white;
+        border-radius: 20px;
+        border: none;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        overflow: hidden;
+        margin-bottom: 2rem;
+    }
+
+    .doc-table { margin-bottom: 0; }
+    
+    .doc-table thead th {
+        background: #f8fafc;
+        color: #64748b;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 1.2rem;
+        border: none;
+    }
+
+    .doc-table td {
+        padding: 1.2rem;
+        vertical-align: middle;
+        border-color: #f1f5f9;
+        font-size: 0.95rem;
+    }
+
+    /* Thumbnail Hover */
+    .qr-thumbnail {
+        transition: transform 0.2s;
+        border-radius: 8px;
+        border: 1px solid #eee;
+    }
+    .qr-thumbnail:hover {
+        transform: scale(1.1);
+    }
+
+    /* Mobile Responsive Logic */
+    @media (max-width: 992px) {
+        .doc-table thead { display: none; }
+        .doc-table tr { 
+            display: block; 
+            border-bottom: 2px solid #f1f5f9; 
+            padding: 20px 0; 
+        }
+        .doc-table td { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            padding: 8px 20px; 
+            border: none; 
+            text-align: right;
+        }
+        .doc-table td:before {
+            content: attr(data-label);
+            font-weight: 700;
+            color: #94a3b8;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            text-align: left;
+            margin-right: 15px;
+        }
+        /* Make QR and Buttons look better on mobile */
+        .doc-table td[data-label="QR Code"], 
+        .doc-table td[data-label="View"], 
+        .doc-table td[data-label="Delete"] {
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .doc-table td[data-label="QR Code"]:before,
+        .doc-table td[data-label="View"]:before,
+        .doc-table td[data-label="Delete"]:before {
+            margin-bottom: 5px;
+            margin-right: 0;
+        }
+    }
+</style>
+
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+    <div>
+        <h2 class="fw-bold mb-0">Trip Documents</h2>
+        <p class="text-muted small mb-0">Manage and view your trip QR codes and files.</p>
+    </div>
+    {% if user.is_superuser %}
+    <a href="{% url 'upload_document' %}" class="btn btn-primary-custom shadow-sm">
+        <span>📤 Upload New</span>
+    </a>
+    {% endif %}
+</div>
+
+<div class="doc-card">
+    <div class="table-responsive">
+        <table class="table doc-table">
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>QR Number</th>
+                    <th>Description</th>
+                    <th>Upload Date</th>
+                    <th>QR Code</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for doc in documents %}
+                <tr>
+                    <td data-label="Number"><strong>#{{ doc.number }}</strong></td>
+                    <td data-label="QR Number">
+                        <span class="badge bg-light text-dark border">{{ doc.qr_number }}</span>
+                    </td>
+                    <td data-label="Description" class="text-muted">{{ doc.description|truncatechars:30 }}</td>
+                    <td data-label="Upload Date" class="small">{{ doc.upload_date|date:"Y-m-d H:i" }}</td>
+                    <td data-label="QR Code">
+                        <a href="{% url 'document_detail' doc.pk %}">
+                            <img src="{% url 'qr_code' doc.pk %}" alt="QR" width="50" class="qr-thumbnail">
+                        </a>
+                    </td>
+                    <td data-label="View">
+                        <div class="d-flex justify-content-center gap-2">
+                            <a href="{% url 'document_detail' doc.pk %}" class="btn btn-sm btn-outline-info rounded-pill px-3">View</a>
+                            {% if user.is_superuser %}
+                            <a href="{% url 'delete_document' doc.pk %}" class="btn btn-sm btn-outline-danger rounded-pill px-3"
+                               onclick="return confirm('Are you sure?')">Delete</a>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center py-5 text-muted">
+                        No documents uploaded yet.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a href="/" class="text-decoration-none text-muted small">← Back to Trip Plan</a>
+</div>
+
+{% endblock %}
