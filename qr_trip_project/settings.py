@@ -3,10 +3,10 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'qr_trip_manager',
-        'USER': 'postgres',      
-        'PASSWORD': 'P@ssw0rdit', 
+        'ENGINE': '',
+        'NAME': '',
+        'USER': '',      
+        'PASSWORD': '', 
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -89,7 +89,7 @@ LOGOUT_REDIRECT_URL = '/'  # Redirect after logout
 
 DEBUG = True
 ALLOWED_HOSTS = ['*']
-SECRET_KEY = '&(rn^46js1n&_2o3=q#c_5v1xk1!zzvueuyl2gt5x2*x(tr*+q'
+SECRET_KEY = ''
 
 
 
